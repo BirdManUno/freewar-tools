@@ -1,0 +1,18 @@
+table {
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: rgb(211,255,161);
+    font-size: 1.25em;
+}
+
+td {
+    padding: 5px;
+    border: 1px solid grey;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgb(211, 255, 161,0.3);
+}
+
