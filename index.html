@@ -2,29 +2,42 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Sicht der Dinge - Tool</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="main.css">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sicht der Dinge - Tool</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style/main.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        
+    <div class="grid-container">
+    <div>
         <h2>Sicht der Dinge-Tool</h2>
-        <p>Einfach Textinhalt der Sicht der Dinge einfügen (Linksklick -> STRG+A) und auf "Tabelle erzeugen" klicken.</p>
+        <p>Einfach Textinhalt der Sicht der Dinge einfügen (Linksklick -> STRG+A) und auf "Tabelle erzeugen" klicken.
+        </p>
         <!--<div>
             <input type="checkbox" name="filter_ds_option" id="" checked>
             <label for="filter_ds_option">Items mit DS filtern</label>
         </div>!-->
         <textarea id="textarea-sicht" rows="10" cols="60" placeholder="Hier Sicht der Dinge - Text einfügen"></textarea>
         <br>
-        <button onclick="doSomething()">Tabelle erzeugen</button>
-        <script src="script.js" async defer></script>
-    </body>
+        <button onclick="parseTextArea()">Tabelle erzeugen</button>
+    </div>
+    <div id="result">
+        <div id="player-summary"></div>
+        <div id="items"></div>
+    </div>
+    </div>
+    <script src="scripts/script.js" async defer></script>
+</body>
+
 </html>
