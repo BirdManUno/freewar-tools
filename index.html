@@ -24,12 +24,16 @@
         <h2>Sicht der Dinge-Tool</h2>
         <p>Einfach Textinhalt der Sicht der Dinge einfügen (Linksklick -> STRG+A) und auf "Tabelle erzeugen" klicken.
         </p>
-        <!--<div>
-            <input type="checkbox" name="filter_ds_option" id="" checked>
-            <label for="filter_ds_option">Items mit DS filtern</label>
-        </div>!-->
         <textarea id="textarea-sicht" rows="10" cols="60" placeholder="Hier Sicht der Dinge - Text einfügen"></textarea>
         <br>
+        <div>
+            <input type="checkbox" name="filter_ds_option" onchange="filterAndRerenderItems(this)" id="filter_ds_option" checked>
+            <label for="filter_ds_option">Zeige Items mit DS</label>
+        </div>
+        <div>
+            <input type="checkbox" name="filter_ts_option" onchange="filterAndRerenderItems(this)" id="filter_ts_option" checked>
+            <label for="filter_ds_option">Zeige Items mit TS</label>
+        </div>
         <button onclick="parseTextArea()">Tabelle erzeugen</button>
     </div>
     <div id="result">
@@ -37,6 +41,7 @@
         <div id="items"></div>
     </div>
     </div>
+    <script src="item_prices.js"></script>
     <script src="script.js" async defer></script>
 </body>
 
