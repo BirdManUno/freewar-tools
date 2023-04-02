@@ -34,6 +34,10 @@
             <input type="checkbox" name="filter_ts_option" onchange="filterAndRerenderItems(this)" id="filter_ts_option" checked>
             <label for="filter_ds_option">Zeige Items mit TS</label>
         </div>
+        <div>
+            <input type="checkbox" name="filter_unknown_items" onchange="filterAndRerenderItems(this)" id="filter_unknown_items" checked>
+            <label for="filter_ds_option">Zeige nur Items mit "?"</label>
+        </div>
         <button onclick="parseTextArea()">Tabelle erzeugen</button>
     </div>
     <div id="result">

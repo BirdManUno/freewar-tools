@@ -25,7 +25,7 @@ class Player {
 
       var item_price =
         ITEM_PRICES[item_name.replace(Player.ITEM_DETAILS_REGEX, "").trim()] ||
-        0;
+        "?";
       var item_details = {
         item_name: item_name,
         amount: amount,
@@ -33,9 +33,8 @@ class Player {
         has_ds: hasDs,
         has_ts: hasTs,
         item_price: item_price,
-        display: false,
+        display: true,
       };
-      //console.log(item_details);
       if (item_map.has(item_name)) {
         item_map.get(item_name).amount =
           item_map.get(item_name).amount + item_details.amount;
@@ -70,8 +69,20 @@ function renderPlayerInfoTable(p) {
   xpP.textContent = `XP : ${p.xp}`;
   var item_count =
     Array.from(p.items.values()).reduce((a, item) => a + item.amount, 0) + "";
+  var true_item_count =
+    Array.from(p.items.values()).reduce((a, item) => {
+      if (item.display) {
+        return a + item.amount;
+      } else {
+        return a + 0;
+      }
+    }, 0) + "";
+  console.log(true_item_count);
   var itemCountP = document.createElement("p");
   itemCountP.textContent = `Anzahl Items : ${item_count}`;
+  var spanTrueItemCount = document.createElement("span");
+  spanTrueItemCount.textContent = ` (${true_item_count} im aktuellen Filter)`;
+  itemCountP.append(spanTrueItemCount);
   var goldP = document.createElement("p");
   goldP.textContent = `${p.gold} Goldmünzen`;
   playerDiv.append(nameP, goldP, itemCountP);
@@ -89,7 +100,6 @@ function renderItemTable(items, p) {
   appendHeader();
   var tBody = newTable.createTBody();
   p.items.forEach(function (value, key, map) {
-    console.log(value.display);
     if (value.display == true) {
       var row = tBody.insertRow(-1);
       item_name_cell = row.insertCell(-1);
@@ -100,6 +110,8 @@ function renderItemTable(items, p) {
       row.insertCell(-1).textContent = value.has_ts ? "✓" : "✗";
       row.insertCell(-1).textContent = value.item_price
         ? value.item_price
+        : value.item_price == 0
+        ? 0
         : "?";
       //row.insertCell(-1).textContent = value.item_price;
     }
@@ -134,6 +146,7 @@ function filterAndRerenderItems() {
 function filterItems(e) {
   var ds_checkbox = document.getElementById("filter_ds_option");
   var ts_checkbox = document.getElementById("filter_ts_option");
+  var questionmark_checkbox = document.getElementById("filter_unknown_items");
 
   p.items.forEach(function (k, v) {
     if (ds_checkbox.checked && ts_checkbox.checked) {
@@ -142,7 +155,6 @@ function filterItems(e) {
       k.display = true;
     } else if (ds_checkbox.checked && !ts_checkbox.checked) {
       //console.log("DS checked, TS nicht");
-      console.log(k, "\t", k.has_ds, "\t", k.has_ts);
       // Alle mit DS & ohne TS auf False, rest True
       //k.display = k.has_ds && !k.has_ts ? true : false;
       k.display = !k.has_ts ? true : false;
@@ -150,6 +162,9 @@ function filterItems(e) {
       k.display = !k.has_ds ? true : false;
     } else {
       k.display = !k.has_ds && !k.has_ts ? true : false;
+    }
+    if (questionmark_checkbox.checked) {
+      k.display = k.item_price == "?" ? true : false;
     }
   });
 }
@@ -178,7 +193,15 @@ function sortItemsBy() {
     Array.from(
       [...p.items.entries()].sort((a, b) => {
         // a[0], b[0] is the key of the map
-        //console.log(a, b);
+        if (!isFinite(b[1].item_price) && !isFinite(a[1].item_price)) {
+          return 0;
+        }
+        if (!isFinite(a[1].item_price)) {
+          return 1;
+        }
+        if (!isFinite(b[1].item_price)) {
+          return -1;
+        }
         return b[1].item_price - a[1].item_price;
       })
     )
