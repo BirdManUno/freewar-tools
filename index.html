@@ -27,15 +27,15 @@
         <textarea id="textarea-sicht" rows="10" cols="60" placeholder="Hier Sicht der Dinge - Text einfügen"></textarea>
         <br>
         <div>
-            <input type="checkbox" name="filter_ds_option" onchange="filterAndRerenderItems(this)" id="filter_ds_option" checked>
+            <input type="checkbox" name="filter_ds_option" onchange="filterAndRerenderItems(this)" id="filter_ds_option">
             <label for="filter_ds_option">Zeige Items mit DS</label>
         </div>
         <div>
-            <input type="checkbox" name="filter_ts_option" onchange="filterAndRerenderItems(this)" id="filter_ts_option" checked>
+            <input type="checkbox" name="filter_ts_option" onchange="filterAndRerenderItems(this)" id="filter_ts_option">
             <label for="filter_ds_option">Zeige Items mit TS</label>
         </div>
         <div>
-            <input type="checkbox" name="filter_unknown_items" onchange="filterAndRerenderItems(this)" id="filter_unknown_items" checked>
+            <input type="checkbox" name="filter_unknown_items" onchange="filterAndRerenderItems(this)" id="filter_unknown_items">
             <label for="filter_ds_option">Zeige nur Items mit "?"</label>
         </div>
         <button onclick="parseTextArea()">Tabelle erzeugen</button>
